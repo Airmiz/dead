@@ -94,7 +94,7 @@ fn draw_main(overlay: &mut Overlay, ctx: &Context, _ui: &mut Ui) {
                             );
                             if ui.selectable_value(
                                 &mut overlay.lang,
-                                Lang::RU,
+                                Lang::EN,
                                 "English",
                             ).clicked() {
                             };

@@ -3,22 +3,6 @@
 version = 3
 
 [[package]]
-name = "aaa123"
-version = "0.1.1"
-dependencies = [
- "clap",
- "eframe",
- "egui",
- "emath",
- "env_logger",
- "log",
- "serde",
- "serde_json",
- "sysinfo",
- "windows 0.58.0",
-]
-
-[[package]]
 name = "ab_glyph"
 version = "0.2.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1851,6 +1835,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62bb907fe88d54d8d9ce32a3cceab4218ed2f6b7d35617cafe9adf84e43919cb"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "math_way"
+version = "0.1.1"
+dependencies = [
+ "clap",
+ "eframe",
+ "egui",
+ "emath",
+ "env_logger",
+ "log",
+ "serde",
+ "serde_json",
+ "sysinfo",
+ "windows 0.58.0",
 ]
 
 [[package]]
