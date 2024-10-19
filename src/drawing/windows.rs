@@ -89,13 +89,13 @@ fn draw_main(overlay: &mut Overlay, ctx: &Context, _ui: &mut Ui) {
                         .show_ui(ui, |ui| {
                             ui.selectable_value(
                                 &mut overlay.lang,
-                                Lang::RU,
-                                "Русский",
+                                Lang::EN,
+                                "English",
                             );
                             if ui.selectable_value(
                                 &mut overlay.lang,
-                                Lang::EN,
-                                "English",
+                                Lang::RU,
+                                "Русский",
                             ).clicked() {
                             };
                             if ui.selectable_value(
@@ -132,29 +132,52 @@ fn draw_main(overlay: &mut Overlay, ctx: &Context, _ui: &mut Ui) {
 
 fn draw_aim(overlay: &mut Overlay, ctx: &Context, _ui: &mut Ui) {
     egui::Window::new("Aim")
-        .resizable(false).show(ctx, |ui| {
-            if overlay.settings.aim.angle_per_pixel == 0f32
-            {
-                ui.label(egui::RichText::new(overlay.lang.aim_not_calibrated()).color(egui::Color32::RED));
+        .resizable(false)
+        .show(ctx, |ui| {
+            if overlay.settings.aim.angle_per_pixel == 0f32 {
+                ui.label(
+                    egui::RichText::new(overlay.lang.aim_not_calibrated())
+                        .color(egui::Color32::RED),
+                );
             }
+
             if ui.button(overlay.lang.aim_calibrate()).clicked() {
                 unsafe { SetForegroundWindow(overlay.game_hwnd).unwrap(); }
-                overlay.settings.aim.angle_per_pixel = aim::aiming::calibrate(&mut overlay.game);
-                if overlay.settings.aim.angle_per_pixel.is_nan()
-                {
+                overlay.settings.aim.angle_per_pixel = 
+                    aim::aiming::calibrate(&mut overlay.game);
+
+                if overlay.settings.aim.angle_per_pixel.is_nan() {
                     overlay.settings.aim.angle_per_pixel = 0f32;
                 }
                 unsafe { SetForegroundWindow(overlay.overlay_hwnd).unwrap(); }
             }
 
+            // Players Section
             ui.collapsing(overlay.lang.aim_players(), |ui| {
                 aim_element(ui, &mut overlay.settings.aim, false, &overlay.lang);
+
+                // Checkbox for Player FOV
+                if ui.checkbox(
+                    &mut overlay.settings.aim.enable_player_fov, 
+                    "Enable Player FOV"
+                ).changed() {
+                    //println!("Player FOV Enabled: {}", overlay.settings.aim.enable_player_fov);
+                }
             });
+
+            // Creeps Section
             ui.collapsing(overlay.lang.aim_creeps(), |ui| {
                 aim_element(ui, &mut overlay.settings.aim, true, &overlay.lang);
+
+                // Checkbox for Creep FOV
+                if ui.checkbox(
+                    &mut overlay.settings.aim.enable_creep_fov, 
+                    "Enable Creep FOV"
+                ).changed() {
+                    //println!("Creep FOV Enabled: {}", overlay.settings.aim.enable_creep_fov);
+                }
             });
-        }
-    );
+        });
 }
 
 fn draw_esp(overlay: &mut Overlay, ctx: &Context, _ui: &mut Ui) {
