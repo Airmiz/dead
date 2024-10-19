@@ -120,7 +120,7 @@ impl Default for Overlay
             settings: Settings::default(),
             game: External::new(),
             udp_socket: socket,
-            lang: Lang::RU,
+            lang: Lang::EN,
             font_loaded: false,
             current_config: "default".to_owned(),
             configs,
