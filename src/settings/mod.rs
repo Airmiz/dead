@@ -194,7 +194,9 @@ impl Default for AimSettings
             soul_color: Color32::RED,
             players,
             creeps,
-            aim_bone: TargetBone::Head
+            aim_bone: TargetBone::Head,
+            enable_player_fov: true,
+            enable_creep_fov: true,
         }
     }
 }

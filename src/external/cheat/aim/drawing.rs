@@ -13,9 +13,12 @@ pub fn draw(g: &egui::Painter, settings: &AimSettings, entities: &Vec<Entity>, m
                 ent.draw(g, matrix, &settings);
             }
         }
-        draw_fov(g, &settings.creeps);
+
+        if settings.enable_creep_fov {
+            draw_fov(g, &settings.creeps); 
+        }
     }
-    if settings.players.enable {
+    if settings.players.enable && settings.enable_player_fov{
         draw_fov(g, &settings.players);
     }
 }

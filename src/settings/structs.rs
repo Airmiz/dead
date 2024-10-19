@@ -60,7 +60,9 @@ pub struct Settings {
 pub struct AimSettings
 {
     pub players: AimProperties,
+    pub enable_player_fov: bool,
     pub creeps: AimProperties,
+    pub enable_creep_fov: bool,
     pub angle_per_pixel: f32,
     pub creep_color: Color32,
     pub soul_color: Color32,
