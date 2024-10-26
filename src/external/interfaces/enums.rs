@@ -193,6 +193,7 @@ impl TryFrom<i32> for Hero
 
     fn try_from(value: i32) -> Result<Self, Self::Error> {
         match value {
+            0 => Ok(Hero::None),
             1 => Ok(Hero::Infernus),
             2 => Ok(Hero::Seven),
             3 => Ok(Hero::Vindicta),
